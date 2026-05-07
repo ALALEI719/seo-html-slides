@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="zh-Hans" data-theme="editorial">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI时代，品牌如何在 Google 和 AI 搜索中被看见</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* 全屏铺满视口；默认纸刊编辑。data-theme 切换后写入 localStorage */
+    html {
+      --bg: #0a0c10;
+      --bg-card: #12151c;
+      --text: #e8eaef;
+      --muted: #8b93a7;
+      --accent: #3d8bfd;
+      --accent-soft: rgba(61, 139, 253, 0.15);
+      --warn: #f0b429;
+      --line: rgba(255, 255, 255, 0.08);
+      --body-bg: #050608;
+      --shadow-stage: 0 0 0 1px var(--line), 0 24px 80px rgba(0, 0, 0, 0.55);
+      --ui-scrim: rgba(0, 0, 0, 0.65);
+      --dot-idle: rgba(255, 255, 255, 0.2);
+      --dot-hover: rgba(255, 255, 255, 0.45);
+      --kbd-bg: rgba(255, 255, 255, 0.08);
+      --font-h: "Outfit", "Noto Sans SC", system-ui, sans-serif;
+      --font-body: "Noto Sans SC", "Outfit", system-ui, sans-serif;
+      --font-stat: "Outfit", sans-serif;
+      --stage-radius: 12px;
+    }
+
+    html[data-theme="daylight"] {
+      --bg: #f6f7f9;
+      --bg-card: #ffffff;
+      --text: #1a1d26;
+      --muted: #5c6370;
+      --accent: #1546a0;
+      --accent-soft: rgba(21, 70, 160, 0.1);
+      --warn: #b45309;
+      --line: rgba(0, 0, 0, 0.08);
+      --body-bg: #e4e7ec;
+      --shadow-stage: 0 0 0 1px var(--line), 0 16px 48px rgba(0, 0, 0, 0.08);
+      --ui-scrim: rgba(246, 247, 249, 0.92);
+      --dot-idle: rgba(0, 0, 0, 0.12);
+      --dot-hover: rgba(0, 0, 0, 0.28);
+      --kbd-bg: rgba(0, 0, 0, 0.06);
+    }
+
+    html[data-theme="editorial"] {
+      --bg: #f7f4ed;
+      --bg-card: #fffdf8;
+      --text: #2c2824;
+      --muted: #6b6560;
+      --accent: #8b2942;
+      --accent-soft: rgba(139, 41, 66, 0.1);
+      --warn: #6b5b2c;
+      --line: rgba(44, 40, 36, 0.1);
+      --body-bg: #ebe6dc;
+      --shadow-stage: 0 0 0 1px var(--line), 0 14px 40px rgba(44, 40, 36, 0.07);
+      --ui-scrim: rgba(247, 244, 237, 0.94);
+      --dot-idle: rgba(44, 40, 36, 0.15);
+      --dot-hover: rgba(44, 40, 36, 0.35);
+      --kbd-bg: rgba(44, 40, 36, 0.06);
+      --font-h: "Noto Serif SC", "Noto Sans SC", serif;
+      --font-stat: "Noto Serif SC", serif;
+    }
+
+    html[data-theme="forest"] {
+      --bg: #0d1814;
+      --bg-card: #14231d;
+      --text: #e6f0ea;
+      --muted: #8aa89a;
+      --accent: #3ecf9f;
+      --accent-soft: rgba(62, 207, 159, 0.14);
+      --warn: #e8c547;
+      --line: rgba(230, 240, 234, 0.09);
+      --body-bg: #070d0a;
+      --shadow-stage: 0 0 0 1px var(--line), 0 24px 80px rgba(0, 0, 0, 0.5);
+      --ui-scrim: rgba(0, 0, 0, 0.62);
+      --dot-idle: rgba(230, 240, 234, 0.18);
+      --dot-hover: rgba(230, 240, 234, 0.42);
+      --kbd-bg: rgba(230, 240, 234, 0.08);
+    }
+
+    html[data-theme="neon"] {
+      --bg: #120a18;
+      --bg-card: #1c1226;
+      --text: #f3e8ff;
+      --muted: #b8a3c9;
+      --accent: #e879f9;
+      --accent-soft: rgba(232, 121, 249, 0.12);
+      --warn: #22d3ee;
+      --line: rgba(232, 121, 249, 0.14);
+      --body-bg: #0a0610;
+      --shadow-stage: 0 0 0 1px var(--line), 0 24px 90px rgba(232, 121, 249, 0.12);
+      --ui-scrim: rgba(0, 0, 0, 0.68);
+      --dot-idle: rgba(243, 232, 255, 0.2);
+      --dot-hover: rgba(243, 232, 255, 0.5);
+      --kbd-bg: rgba(232, 121, 249, 0.12);
+    }
+
+    html[data-theme="terracotta"] {
+      --bg: #1c1410;
+      --bg-card: #2a1f18;
+      --text: #f4ebe4;
+      --muted: #b9a99a;
+      --accent: #e07a4f;
+      --accent-soft: rgba(224, 122, 79, 0.14);
+      --warn: #d4a574;
+      --line: rgba(244, 235, 228, 0.1);
+      --body-bg: #120e0b;
+      --shadow-stage: 0 0 0 1px var(--line), 0 22px 70px rgba(0, 0, 0, 0.48);
+      --ui-scrim: rgba(0, 0, 0, 0.62);
+      --dot-idle: rgba(244, 235, 228, 0.18);
+      --dot-hover: rgba(244, 235, 228, 0.42);
+      --kbd-bg: rgba(244, 235, 228, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      min-height: 100dvh;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      overflow: hidden;
+    }
+
+    .deck {
+      width: 100%;
+      min-height: 100dvh;
+      height: 100dvh;
+      margin: 0;
+      padding: 0;
+      display: block;
+    }
+
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 100dvh;
+      background: var(--bg);
+      border-radius: 0;
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    .slides {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding:
+        max(clamp(32px, 4.5vw, 72px), env(safe-area-inset-top, 0px)) max(clamp(40px, 5vw, 88px), env(safe-area-inset-right, 0px)) max(clamp(32px, 4.5vw, 72px), env(safe-area-inset-bottom, 0px)) max(clamp(40px, 5vw, 88px), env(safe-area-inset-left, 0px));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      transform: translateY(8px);
+    }
+
+    .slide.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .slide h1 {
+      font-family: var(--font-h);
+      font-weight: 700;
+      font-size: clamp(1.75rem, 3.2vw, 3.25rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      max-width: 22ch;
+      margin-bottom: 0.35em;
+    }
+
+    .slide h2 {
+      font-family: var(--font-h);
+      font-weight: 600;
+      font-size: clamp(1.1rem, 1.85vw, 1.65rem);
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.02em;
+    }
+
+    .slide .lead {
+      font-size: clamp(1rem, 1.5vw, 1.35rem);
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 52ch;
+      margin-bottom: 1.5rem;
+    }
+
+    /* 第 3 页「什么是 SEO」：居中 + 导语高亮（仅此页） */
+    .slide.slide-seo-hero {
+      align-items: center;
+      text-align: center;
+    }
+
+    .slide.slide-seo-hero h2 {
+      margin-bottom: clamp(1rem, 2.5vw, 1.75rem);
+    }
+
+    .slide.slide-seo-hero .lead {
+      max-width: min(44em, 94%);
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 0;
+      color: var(--text);
+      font-size: clamp(1.08rem, 1.75vw, 1.52rem);
+      font-weight: 500;
+      line-height: 1.75;
+      padding: clamp(22px, 3vw, 38px) clamp(28px, 4vw, 52px);
+      background: var(--accent-soft);
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    html[data-theme="midnight"] .slide.slide-seo-hero .lead,
+    html[data-theme="forest"] .slide.slide-seo-hero .lead,
+    html[data-theme="neon"] .slide.slide-seo-hero .lead,
+    html[data-theme="terracotta"] .slide.slide-seo-hero .lead {
+      box-shadow: 0 4px 28px rgba(0, 0, 0, 0.25);
+    }
+
+    /* 仅标题一页：垂直 + 水平居中 */
+    .slide.slide-ranking-title-only {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .slide.slide-ranking-title-only h2 {
+      margin-bottom: 0;
+      width: fit-content;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .slide.slide-crawl-index h2 {
+      text-align: center;
+      width: 100%;
+      align-self: stretch;
+      margin-bottom: clamp(1rem, 2vw, 1.75rem);
+    }
+
+    .slide.slide-crawl-index .crawl-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+      gap: clamp(20px, 3vw, 40px);
+      width: 100%;
+      align-items: center;
+    }
+
+    /* 左图右文（与默认列宽对调） */
+    .slide.slide-crawl-index .crawl-split.crawl-split--figure-left {
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    }
+
+    @media (max-aspect-ratio: 4/3) {
+      .slide.slide-crawl-index .crawl-split {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .slide.slide-crawl-index .crawl-text-stack {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(12px, 1.8vw, 18px);
+      min-width: 0;
+    }
+
+    .slide.slide-crawl-index .crawl-figure-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .slide.slide-crawl-index .crawl-figure {
+      width: 100%;
+      max-height: min(56vh, 520px);
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    /* SERP 示例图：整块可点击热区（新标签打开 Google 搜索结果） */
+    .slide.slide-crawl-index .crawl-figure-wrap a.serp-hotspot {
+      display: block;
+      line-height: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 6px 32px rgba(0, 0, 0, 0.35);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    html[data-theme="editorial"] .slide.slide-crawl-index .crawl-figure-wrap a.serp-hotspot,
+    html[data-theme="daylight"] .slide.slide-crawl-index .crawl-figure-wrap a.serp-hotspot {
+      box-shadow: 0 8px 32px rgba(44, 40, 36, 0.14);
+    }
+
+    .slide.slide-crawl-index .crawl-figure-wrap a.serp-hotspot:hover {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.42);
+      transform: translateY(-2px);
+    }
+
+    html[data-theme="editorial"] .slide.slide-crawl-index .crawl-figure-wrap a.serp-hotspot:hover,
+    html[data-theme="daylight"] .slide.slide-crawl-index .crawl-figure-wrap a.serp-hotspot:hover {
+      box-shadow: 0 12px 40px rgba(44, 40, 36, 0.2);
+    }
+
+    .slide.slide-crawl-index .crawl-figure-wrap a.serp-hotspot:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .slide.slide-crawl-index .crawl-figure-wrap a.serp-hotspot .crawl-figure {
+      display: block;
+    }
+
+    .slide.slide-crawl-index .card p {
+      margin-bottom: 0.65rem;
+      font-size: clamp(0.82rem, 1.08vw, 0.98rem);
+      line-height: 1.58;
+    }
+
+    .slide.slide-crawl-index .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .slide.slide-crawl-index .card h3 {
+      font-size: clamp(0.88rem, 1.18vw, 1.05rem);
+      line-height: 1.4;
+      margin-bottom: 0.8rem;
+    }
+
+    /* 如何执行：2×2 四宫格，宽度与行高随内容收紧，避免空块过大 */
+    .slide.slide-how-exec {
+      justify-content: center;
+    }
+
+    .slide.slide-how-exec h2 {
+      text-align: center;
+      width: 100%;
+      align-self: stretch;
+      margin-bottom: clamp(0.75rem, 1.5vw, 1.1rem);
+      flex-shrink: 0;
+    }
+
+    .slide.slide-how-exec .exec-quad-grid {
+      flex: 0 1 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: clamp(10px, 1.5vw, 16px);
+      width: 100%;
+      max-width: min(720px, 88%);
+      margin: 0 auto;
+      align-self: center;
+    }
+
+    @media (max-aspect-ratio: 4/3) {
+      .slide.slide-how-exec .exec-quad-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        grid-auto-rows: auto;
+        max-width: min(420px, 92%);
+      }
+    }
+
+    .slide.slide-how-exec .exec-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(12px, 1.6vw, 18px) clamp(14px, 1.8vw, 20px);
+    }
+
+    .slide.slide-how-exec .exec-card h3 {
+      font-size: clamp(0.88rem, 1.15vw, 1.02rem);
+      margin-bottom: 0.45rem;
+      line-height: 1.35;
+    }
+
+    .slide.slide-how-exec .exec-card p {
+      font-size: clamp(0.8rem, 1.05vw, 0.94rem);
+      line-height: 1.5;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* 8/17：数字资产 · 标题居中 + 2×2 四宫格 */
+    .slide.slide-asset-seo {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .slide.slide-asset-seo .asset-stack {
+      width: 100%;
+      max-width: min(58rem, 96%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* 与全稿 .slide h2 一致，仅本页标题居中 */
+    .slide.slide-asset-seo h2 {
+      text-align: center;
+      width: 100%;
+      align-self: stretch;
+    }
+
+    .slide.slide-asset-seo .asset-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: clamp(12px, 1.8vw, 20px);
+      width: 100%;
+      max-width: min(900px, 94%);
+      min-width: 0;
+      min-height: min(44vh, 400px);
+    }
+
+    @media (max-aspect-ratio: 4/3) {
+      .slide.slide-asset-seo .asset-cards {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+        grid-auto-rows: auto;
+        max-width: min(440px, 94%);
+        min-height: 0;
+      }
+
+      .slide.slide-asset-seo .asset-card {
+        height: auto;
+      }
+    }
+
+    .slide.slide-asset-seo .asset-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(0.35rem, 0.8vw, 0.55rem);
+      width: 100%;
+      min-height: 0;
+      height: 100%;
+      padding: clamp(10px, 1.35vw, 14px) clamp(12px, 1.5vw, 16px);
+      background: var(--bg-card);
+      border: none;
+      border-radius: 10px;
+      border-left: 4px solid var(--accent);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.25s ease;
+    }
+
+    html[data-theme="midnight"] .slide.slide-asset-seo .asset-card,
+    html[data-theme="forest"] .slide.slide-asset-seo .asset-card,
+    html[data-theme="neon"] .slide.slide-asset-seo .asset-card,
+    html[data-theme="terracotta"] .slide.slide-asset-seo .asset-card {
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.22);
+    }
+
+    .slide.slide-asset-seo.active .asset-card {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide.slide-asset-seo.active .asset-card:nth-child(1) {
+      transition-delay: 0.06s;
+    }
+
+    .slide.slide-asset-seo.active .asset-card:nth-child(2) {
+      transition-delay: 0.14s;
+    }
+
+    .slide.slide-asset-seo.active .asset-card:nth-child(3) {
+      transition-delay: 0.22s;
+    }
+
+    .slide.slide-asset-seo.active .asset-card:nth-child(4) {
+      transition-delay: 0.3s;
+    }
+
+    .slide.slide-asset-seo.active .asset-card:hover {
+      transform: translateY(0) scale(1.02);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+    }
+
+    html[data-theme="midnight"] .slide.slide-asset-seo.active .asset-card:hover,
+    html[data-theme="forest"] .slide.slide-asset-seo.active .asset-card:hover,
+    html[data-theme="neon"] .slide.slide-asset-seo.active .asset-card:hover,
+    html[data-theme="terracotta"] .slide.slide-asset-seo.active .asset-card:hover {
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.28);
+    }
+
+    .slide.slide-asset-seo .asset-card-title {
+      margin: 0;
+      font-size: clamp(0.82rem, 1.08vw, 0.95rem);
+      font-weight: 700;
+      line-height: 1.35;
+      color: var(--accent);
+      text-align: center;
+    }
+
+    .slide.slide-asset-seo .asset-card-desc {
+      margin: 0;
+      font-size: clamp(0.74rem, 0.95vw, 0.86rem);
+      line-height: 1.52;
+      color: var(--muted);
+      text-align: center;
+      max-width: 40ch;
+    }
+
+    .slide ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      max-width: 58ch;
+    }
+
+    .slide li {
+      position: relative;
+      padding-left: 1.35em;
+      font-size: clamp(0.95rem, 1.35vw, 1.2rem);
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    .slide li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.85;
+    }
+
+    .slide li.muted {
+      color: var(--muted);
+    }
+
+    .slide li.muted::before {
+      background: var(--muted);
+      opacity: 0.5;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(20px, 2.5vw, 40px);
+      margin-top: 0.5rem;
+      width: 100%;
+    }
+
+    @media (max-aspect-ratio: 4/3) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Navimow 案例：左卡 | vs. | 右卡 */
+    .slide-navimow-network .navimow-vs-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: clamp(14px, 2.2vw, 28px);
+      align-items: stretch;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .slide-navimow-network .navimow-vs-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: stretch;
+      font-family: var(--font-h);
+      font-weight: 700;
+      font-size: clamp(0.95rem, 1.4vw, 1.2rem);
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      padding: 0 2px;
+      user-select: none;
+    }
+
+    @media (max-aspect-ratio: 4/3) {
+      .slide-navimow-network .navimow-vs-split {
+        grid-template-columns: 1fr;
+      }
+
+      .slide-navimow-network .navimow-vs-divider {
+        padding: clamp(6px, 1vw, 10px) 0;
+        order: 2;
+      }
+
+      .slide-navimow-network .navimow-vs-split .card:first-child {
+        order: 1;
+      }
+
+      .slide-navimow-network .navimow-vs-split .card:last-child {
+        order: 3;
+      }
+    }
+
+    /* SEO × MKT 四阶段工作流（PDF）：执行期三栏 */
+    .slide-seo-mkt-workflow .workflow-triple {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(12px, 1.8vw, 20px);
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    @media (max-aspect-ratio: 4/3) {
+      .slide-seo-mkt-workflow .workflow-triple {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .workflow-phase-label {
+      font-size: clamp(0.72rem, 0.95vw, 0.82rem);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: clamp(16px, 2vw, 28px);
+    }
+
+    .card h3 {
+      font-size: clamp(0.95rem, 1.25vw, 1.15rem);
+      font-weight: 600;
+      margin-bottom: 0.65rem;
+      color: var(--warn);
+    }
+
+    .card p {
+      font-size: clamp(0.85rem, 1.15vw, 1.05rem);
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    blockquote.deck-quote {
+      margin: 1.25rem 0 0;
+      padding: clamp(20px, 2.2vw, 32px) clamp(24px, 2.5vw, 36px);
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+      border-radius: 0 10px 10px 0;
+      font-size: clamp(1rem, 1.45vw, 1.25rem);
+      line-height: 1.6;
+      color: var(--text);
+      max-width: 58ch;
+    }
+
+    .tagline {
+      font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+      color: var(--muted);
+      margin-top: 1.5rem;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      font-size: clamp(0.75rem, 1vw, 0.9rem);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .cover h1 {
+      max-width: 20ch;
+      font-size: clamp(2rem, 4vw, 3.75rem);
+    }
+
+    .cover .subtitle {
+      margin-top: 1rem;
+      font-size: clamp(1rem, 1.5vw, 1.3rem);
+      color: var(--muted);
+      max-width: 40ch;
+      line-height: 1.6;
+    }
+
+    .numbered ol {
+      list-style: none;
+      counter-reset: item;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-width: 62ch;
+    }
+
+    .numbered li {
+      counter-increment: item;
+      padding-left: 2.5em;
+      position: relative;
+      font-size: clamp(0.92rem, 1.28vw, 1.12rem);
+      line-height: 1.55;
+    }
+
+    .numbered li::before {
+      content: counter(item);
+      position: absolute;
+      left: 0;
+      top: 0.1em;
+      width: 1.65em;
+      height: 1.65em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-stat);
+      font-weight: 700;
+      font-size: 0.85em;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 8px;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(16px, 2vw, 28px);
+      margin-top: 1rem;
+    }
+
+    .stat {
+      flex: 1 1 200px;
+      min-width: 160px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: clamp(16px, 2vw, 24px);
+    }
+
+    .stat strong {
+      display: block;
+      font-family: var(--font-stat);
+      font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+    }
+
+    .stat span {
+      font-size: clamp(0.85rem, 1.1vw, 1rem);
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    /* Key Takeaways：与「变化二」同源 .stat 字阶；上三下二大卡片排版 */
+    .slide.slide-ai-overview-takeaways {
+      justify-content: flex-start;
+    }
+
+    .slide.slide-ai-overview-takeaways .takeaways-grid-3-2 {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(18px, 2.8vw, 28px);
+      width: 100%;
+      margin-top: 0.5rem;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .slide.slide-ai-overview-takeaways .takeaways-row--top3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(16px, 2.4vw, 28px);
+    }
+
+    .slide.slide-ai-overview-takeaways .takeaways-row--bot2 {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: clamp(16px, 2.4vw, 28px);
+      flex-wrap: wrap;
+    }
+
+    .slide.slide-ai-overview-takeaways .takeaways-row--bot2 .stat {
+      flex: 1 1 300px;
+      max-width: min(480px, calc(50% - 12px));
+      min-width: min(268px, 100%);
+    }
+
+    .slide.slide-ai-overview-takeaways .takeaways-grid-3-2 .stat {
+      padding: clamp(26px, 4.2vw, 44px) clamp(22px, 3.5vw, 36px);
+      min-height: clamp(156px, 21vh, 218px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: left;
+      border-radius: 12px;
+    }
+
+    @media (max-width: 960px) {
+      .slide.slide-ai-overview-takeaways .takeaways-row--top3 {
+        grid-template-columns: 1fr;
+      }
+
+      .slide.slide-ai-overview-takeaways .takeaways-row--bot2 .stat {
+        max-width: 100%;
+      }
+    }
+
+    /* 三项变化 → SEO：字阶对齐全稿 .slide h2 / .card h3 / ul li */
+    .slide.slide-seo-impact-flowchart {
+      justify-content: flex-start;
+    }
+
+    .slide.slide-seo-impact-flowchart h2 {
+      text-align: center;
+      width: 100%;
+      align-self: stretch;
+      margin-bottom: clamp(1rem, 2vw, 1.75rem);
+      /* font 继承 .slide h2 — var(--font-h)、weight、accent、clamp 字级 */
+    }
+
+    .slide.slide-seo-impact-flowchart .seo-flow-canvas {
+      width: 100%;
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(10px, 2vw, 20px);
+    }
+
+    .seo-flow {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: stretch;
+      justify-content: center;
+      gap: clamp(8px, 1.6vw, 20px);
+      width: 100%;
+      max-width: min(1080px, 100%);
+      margin: 0 auto;
+    }
+
+    .seo-flow-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(6px, 1.2vw, 11px);
+      flex: 0 1 auto;
+    }
+
+    /* 五项统一的文字卡片外皮（同色底·线） */
+    .slide.slide-seo-impact-flowchart .seo-flow-chip,
+    .slide.slide-seo-impact-flowchart .seo-flow-box {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      box-sizing: border-box;
+    }
+
+    .seo-flow-chip {
+      font-family: var(--font-body);
+      padding: clamp(16px, 2vw, 26px);
+      font-size: clamp(0.95rem, 1.35vw, 1.2rem);
+      font-weight: 400;
+      text-align: center;
+      color: var(--text);
+      line-height: 1.55;
+      min-width: clamp(108px, 18vw, 200px);
+      max-width: min(240px, 100%);
+    }
+
+    .seo-flow-arrow {
+      flex-shrink: 0;
+      align-self: center;
+      font-family: var(--font-h);
+      font-size: clamp(1.2rem, 2.2vw, 1.75rem);
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1;
+      user-select: none;
+      padding: 4px;
+    }
+
+    .seo-flow-box {
+      font-family: var(--font-body);
+      padding: clamp(16px, 2vw, 28px);
+      flex: 1 1 clamp(140px, 22vw, 340px);
+      min-width: min(100%, 150px);
+      max-width: min(100%, 400px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(8px, 1.15vw, 12px);
+    }
+
+    .seo-flow-box-head {
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.25vw, 1.15rem);
+      font-weight: 600;
+      line-height: 1.35;
+      margin: 0;
+      color: var(--warn);
+      text-align: center;
+    }
+
+    .seo-flow-box-body {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: clamp(0.95rem, 1.35vw, 1.2rem);
+      font-weight: 400;
+      line-height: 1.55;
+      text-align: center;
+      color: var(--text);
+    }
+
+    @media (max-width: 720px) {
+      .seo-flow {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .seo-flow-inputs {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        max-width: 420px;
+      }
+
+      .seo-flow-chip {
+        flex: 1 1 calc(50% - 8px);
+        min-width: 0;
+        max-width: none;
+      }
+
+      .seo-flow-arrow {
+        transform: rotate(90deg);
+      }
+
+      .seo-flow-box {
+        max-width: min(100%, 420px);
+        width: 100%;
+      }
+    }
+
+    /* 「变化二」后独立一页：全球搜索流量占比示意图（Wix Studio） */
+    .slide.slide-wix-ai-share-chart {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .slide.slide-wix-ai-share-chart h2 {
+      margin-bottom: clamp(0.5rem, 1.2vw, 1rem);
+      max-width: min(42ch, 96%);
+      align-self: center;
+    }
+
+    .slide.slide-wix-ai-share-chart .wix-chart-frame {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(8px, 1.2vw, 14px);
+      width: 100%;
+      flex: 1;
+      min-height: 0;
+      justify-content: center;
+    }
+
+    .slide.slide-wix-ai-share-chart .wix-chart-img {
+      width: 100%;
+      max-width: min(960px, 100%);
+      max-height: min(58vh, 540px);
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--bg-card);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    }
+
+    html[data-theme="editorial"] .slide.slide-wix-ai-share-chart .wix-chart-img,
+    html[data-theme="daylight"] .slide.slide-wix-ai-share-chart .wix-chart-img {
+      box-shadow: 0 8px 36px rgba(44, 40, 36, 0.12);
+    }
+
+    /* 底部说明文案（可与 figcaption / p 复用），与图示页脚注一致 */
+    .slide .wix-chart-caption {
+      font-size: clamp(0.78rem, 1.02vw, 0.9rem);
+      color: var(--muted);
+      max-width: min(54em, 96%);
+      line-height: 1.45;
+    }
+
+    .slide .tagline + .wix-chart-caption {
+      margin-top: clamp(0.5rem, 1vw, 0.85rem);
+    }
+
+    .slide .wix-chart-caption a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .slide .wix-chart-caption a:hover {
+      opacity: 0.92;
+    }
+
+    .ui-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 14px clamp(24px, 3vw, 40px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: linear-gradient(transparent, var(--ui-scrim));
+      font-size: 0.8rem;
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .ui-bar kbd {
+      font-family: inherit;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--kbd-bg);
+      margin: 0 2px;
+    }
+
+    .theme-picker {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 3;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 6px;
+      max-width: min(92%, 520px);
+      pointer-events: auto;
+    }
+
+    .theme-picker span.label {
+      width: 100%;
+      text-align: right;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0.85;
+    }
+
+    .theme-picker button {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 500;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--bg-card);
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+
+    .theme-picker button:hover {
+      color: var(--text);
+      border-color: var(--accent);
+    }
+
+    .theme-picker button.on {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* 全稿共用：右下角品牌标识；不裁切内容，完整显示整图（纵横比由 PNG 决定） */
+    .deck-brand-logo {
+      position: absolute;
+      z-index: 2;
+      right: max(env(safe-area-inset-right, 0px), clamp(20px, 3vw, 40px));
+      bottom: calc(env(safe-area-inset-bottom, 0px) + 50px);
+      max-height: clamp(44px, 6vh, 80px);
+      max-width: min(62vw, 340px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      pointer-events: none;
+      line-height: 0;
+    }
+
+    .deck-brand-logo img {
+      max-height: clamp(44px, 6vh, 80px);
+      width: auto;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      object-position: 100% 100%;
+    }
+
+    .progress {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      max-width: 45%;
+      justify-content: flex-end;
+    }
+
+    .progress button {
+      pointer-events: auto;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      border: none;
+      background: var(--dot-idle);
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .progress button:hover {
+      background: var(--dot-hover);
+    }
+
+    .progress button.on {
+      background: var(--accent);
+      transform: scale(1.15);
+    }
+
+    .hint {
+      font-size: 0.75rem;
+      opacity: 0.75;
+    }
+
+    .slide.slide-faq {
+      justify-content: flex-start;
+    }
+
+    .slide.slide-faq .faq-stack {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(11px, 1.35vw, 15px);
+      width: 100%;
+      max-width: min(50rem, 100%);
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-top: 0.4rem;
+      padding-right: 4px;
+    }
+
+    .slide.slide-faq .faq-item {
+      padding-bottom: clamp(10px, 1.2vw, 14px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .slide.slide-faq .faq-item:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .slide.slide-faq .faq-q {
+      font-size: clamp(0.88rem, 1.12vw, 1.02rem);
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1.4;
+      margin: 0 0 0.35rem;
+    }
+
+    .slide.slide-faq .faq-a {
+      font-size: clamp(0.8rem, 1.05vw, 0.94rem);
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="deck">
+    <div class="stage" id="stage" tabindex="0" role="application" aria-label="幻灯片演示">
+      <div class="theme-picker" id="themePicker" role="toolbar" aria-label="视觉风格">
+        <span class="label">风格</span>
+        <button type="button" data-theme="midnight" title="深蓝暗色 + 亮蓝强调">午夜科技</button>
+        <button type="button" data-theme="daylight" title="浅色背景 + 商务蓝">浅灰商务</button>
+        <button type="button" data-theme="editorial" title="纸色底 + 衬线标题">纸刊编辑</button>
+        <button type="button" data-theme="forest" title="墨绿底 + 薄荷绿强调">森意墨绿</button>
+        <button type="button" data-theme="neon" title="紫粉 + 青色点缀">霓虹夜景</button>
+        <button type="button" data-theme="terracotta" title="暖棕 + 陶土橙">暖沙陶土</button>
+      </div>
+      <div class="deck-brand-logo">
+        <img src="./images/deck-logo.png" alt="NAVIMOW" width="320" height="80" decoding="async" />
+      </div>
+      <div class="slides" id="slides">
+
+        <section class="slide cover active" data-title="封面">
+          <h1>AI时代，品牌如何在 Google 和 AI 搜索中被看见</h1>
+          <p class="subtitle">从单一的 SEO 排名，到霸屏 AI 时代的可引用品牌内容网络。</p>
+        </section>
+
+        <section class="slide" data-title="四类流量">
+          <h2>四类流量（概览）</h2>
+          <div class="grid-2">
+            <div class="card">
+              <h3>直接流量</h3>
+              <p>用户输入网址、收藏夹、或浏览器根据历史自动补全进入。大站常见主力之一，完全免费。</p>
+            </div>
+            <div class="card">
+              <h3>广告流量</h3>
+              <p>点击各类广告进入（搜索广告、Meta、展示、YouTube 等）。带 sponsored 的链接即广告位。</p>
+            </div>
+            <div class="card">
+              <h3>引荐流量</h3>
+              <p>从第三方站点内链点击进入。可能是合作付费链接，也可能是自然引用。</p>
+            </div>
+            <div class="card">
+              <h3>自然搜索流量</h3>
+              <p>点击搜索引擎<strong>自然位</strong>结果进入，英文常称 Organic search traffic。SEO 主要争取的就是这一类。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-seo-hero" data-title="什么是 SEO">
+          <h2>什么是 SEO？</h2>
+          <p class="lead">SEO（search engine optimization），就是通过一系列动作，提高网站页面在搜索引擎上的曝光次数、自然搜索排名和总点击次数的工作。</p>
+        </section>
+
+        <section class="slide slide-ranking-title-only" data-title="如何提高自然搜索排名">
+          <h2>如何提高自然搜索排名？</h2>
+        </section>
+
+        <section class="slide slide-crawl-index" data-title="第一步：先让页面被发现">
+          <h2>第一步：先让页面被发现</h2>
+          <div class="crawl-split">
+            <div class="crawl-text-stack">
+              <div class="card">
+                <h3>1. 抓取 (Crawl)：寻找与发现</h3>
+                <p><strong>业务实质：</strong>搜索引擎派出程序（Bot）扫描全网，寻找新的或更新过的网页。</p>
+                <p><strong>执行动作：</strong>顺着链接「扫街」，寻找新页面。</p>
+                <p><strong>核心：</strong>确保网站大门敞开（服务器稳定）、道路通畅，别让蜘蛛吃闭门羹。</p>
+                <p><strong>白话：</strong>让媒人在茫茫人海中先<strong>「看到」</strong>你。</p>
+              </div>
+              <div class="card">
+                <h3>2. 索引 (Index)：录入与分类</h3>
+                <p><strong>角色：</strong>搜索引擎的「全球档案库」。</p>
+                <p><strong>动作：</strong>读懂内容并贴上标签，存入数据库。</p>
+                <p><strong>核心：</strong>提供清晰的标题与结构，方便系统快速<strong>「分类入库」</strong>。</p>
+                <p><strong>白话：</strong>让媒人把你的资料存进档案，<strong>「记住」</strong>你。</p>
+              </div>
+            </div>
+            <div class="crawl-figure-wrap">
+              <img class="crawl-figure" src="./images/crawl-index-infographic.png" alt="搜索引擎从抓取网页、分析内容、建立索引到排序与响应用户查询的流程示意图"
+                width="800" height="600" decoding="async" />
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-intent-step2 slide-crawl-index" data-title="第二步：给用户最想要的答案">
+          <h2>第二步：给用户「最想要」的答案</h2>
+          <div class="crawl-split">
+            <div class="crawl-text-stack">
+              <div class="card">
+                <h3>核心概念：搜索意图 (Search Intent)</h3>
+                <p><strong>角色：</strong>懂「读心术」的专业助手。</p>
+                <p><strong>动作：</strong>听懂搜索词背后的「潜台词」，对症下药。</p>
+                <p><strong>核心：</strong>拒绝自嗨，通过专业且好懂的内容解决用户燃眉之急，建立深度信任。</p>
+                <p><strong>白话：</strong>不做互联网上的「小广告」，要做对的时间遇到的「对的人」。</p>
+              </div>
+            </div>
+            <div class="crawl-figure-wrap">
+              <img class="crawl-figure" src="./images/search-intent-funnel.png"
+                alt="搜索意图漏斗示意：信息型、导航型、商业型与交易型关键词意图（Keyword Intent Funnel）" width="900" height="700" decoding="async" />
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-how-exec" data-title="如何执行">
+          <h2>如何执行？</h2>
+          <div class="exec-quad-grid">
+            <div class="card exec-card">
+              <h3>技术 SEO（地基）</h3>
+              <p>确保蜘蛛爬得快、网站不宕机、手机访问丝滑。</p>
+            </div>
+            <div class="card exec-card">
+              <h3>内容 SEO（灵魂）</h3>
+              <p>针对搜索意图写好文章，解决用户痛点。</p>
+            </div>
+            <div class="card exec-card">
+              <h3>页面优化（门面）</h3>
+              <p>把标题、描述、图片标签写好，让媒人一眼看中。</p>
+            </div>
+            <div class="card exec-card">
+              <h3>权威度建设（名声）</h3>
+              <p>让其他高权重网站链接我们，形成「江湖口碑」。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-asset-seo" data-title="SEO 长期价值沉淀">
+          <div class="asset-stack">
+            <h2>SEO 之于独立站：多维度的长期价值沉淀</h2>
+            <div class="asset-cards">
+              <div class="asset-card">
+                <p class="asset-card-title">流量结构的「稳定器」</p>
+                <p class="asset-card-desc">与效果广告互补，构建健康的多渠道流量矩阵，降低对单一渠道的依赖风险。</p>
+              </div>
+              <div class="asset-card">
+                <p class="asset-card-title">品牌公信力的「加成点」</p>
+                <p class="asset-card-desc">自然搜索结果的高排名能有效增强品牌在用户心中的专业度与信任感，提升全渠道转化率。</p>
+              </div>
+              <div class="asset-card">
+                <p class="asset-card-title">长期获客的「增量器」</p>
+                <p class="asset-card-desc">随着内容与权重的积累，逐步摊薄单人获客成本（CPA），实现可持续的流量增长复利。</p>
+              </div>
+              <div class="asset-card">
+                <p class="asset-card-title">市场洞察的「反馈桶」</p>
+                <p class="asset-card-desc">深入挖掘海量搜索背后的真实痛点，为产品迭代与营销策略提供真实、客观的数据支撑。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-ranking-title-only" data-title="在AI时代的自然搜索变化">
+          <h2>在AI时代，自然搜索发生了哪些变化？</h2>
+        </section>
+
+        <section class="slide slide-crawl-index" data-title="SERP 多元化">
+          <h2>变化一：SERP 多元化</h2>
+          <div class="crawl-split">
+            <div class="crawl-text-stack">
+              <p class="lead">2023 末至 2024，多轮算法更新后，许多词的前十结果更加多元：</p>
+              <ul>
+                <li><strong>UGC</strong>（Reddit、Quora 等）与<strong>视频</strong>（YouTube / TikTok / Instagram）占比上升。</li>
+                <li>传统网页在 SERP 中的占比相对下降——体感与数据均支持这一趋势。</li>
+              </ul>
+            </div>
+            <div class="crawl-figure-wrap">
+              <a class="serp-hotspot"
+                href="https://www.google.com/search?q=how+to+diy+robot+lawn+mower+garage&amp;hl=en&amp;gl=us"
+                target="_blank" rel="noopener noreferrer"
+                aria-label="在新标签页打开 Google 搜索示例：how to diy robot lawn mower garage（美国区）">
+                <img class="crawl-figure" src="./images/google-serp-diy-robot-lawn-mower-garage-videos.png"
+                  alt="Google 搜索结果示例：查询 how to diy robot lawn mower garage，以深色模式展示 YouTube 视频结果列表"
+                  width="1200" height="800" decoding="async" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-title="AI 搜索与市占">
+          <h2>变化二：AI-based 搜索</h2>
+          <div class="stat-row">
+            <div class="stat">
+              <strong>75%</strong>
+              <span>用户比一年之前更频繁的使用AI工具。</span>
+            </div>
+            <div class="stat">
+              <strong>58%</strong>
+              <span>消费者每天使用Perplexity和ChatGPT做购前调研。</span>
+            </div>
+            <div class="stat">
+              <strong>80%</strong>
+              <span>消费者表示一半的购买决定通过AI工具来做。</span>
+            </div>
+          </div>
+          <p class="tagline">用户搜索行为正在从「只打开传统搜索引擎」转向多工具并存。</p>
+          <p class="wix-chart-caption">
+            本页数据来源：
+            <a href="https://5908207.fs1.hubspotusercontent-na1.net/hubfs/5908207/Exposure%20Ninja%20State%20of%20AI%20Search%20Report.pdf"
+              target="_blank" rel="noopener noreferrer">Exposure Ninja — State of AI Search Report（PDF）</a>
+          </p>
+        </section>
+
+        <section class="slide slide-wix-ai-share-chart" data-title="全球流量占比示意">
+          <h2>全球 AI 搜索与 Google：流量结构的长期对比（示意）</h2>
+          <figure class="wix-chart-frame">
+            <img class="wix-chart-img" src="./images/ai-search-global-share-wix-studio.png"
+              alt="横向堆叠条形图：2023 年 6 月至 2025 年 8 月，Google（浅蓝）占绝对主导；自约 2024 年起右侧出现 ChatGPT、Gemini、Perplexity 等彩色条带。"
+              width="1200" height="704" loading="lazy" decoding="async" />
+            <figcaption class="wix-chart-caption">
+              Jun 2023–Aug 2025：示意 Google 在自然搜索链路中仍为绝对主体；ChatGPT（绿）、Gemini（橙）等 AI 搜索入口逐步形成可见份额。<span
+                aria-hidden="true">图示来源：Wix Studio。</span>
+            </figcaption>
+          </figure>
+        </section>
+
+        <section class="slide slide-wix-ai-share-chart" data-title="LLM 引用域名排行">
+          <h2>AI 的答案从哪来？——LLM 最常引用的站点（示意）</h2>
+          <figure class="wix-chart-frame">
+            <img class="wix-chart-img" src="./images/where-ai-gets-its-facts-semrush.png"
+              alt="信息图 WHERE AI GETS ITS FACTS：大型语言模型（如 ChatGPT、Perplexity）最常引用的前 20 个网站域名及占比条形图，含 reddit、维基百科、YouTube、Google 等"
+              width="1200" height="800" loading="lazy" decoding="async" />
+            <figcaption class="wix-chart-caption">
+              图为 Semrush 对约 15 万条引用的研究中，LLM 最常引用的域名排行摘录（2025 年 6 月）。与「SERP 多元化」「全品牌内容网络」策略相印证：<strong>UGC、百科、视频与主流平台</strong>在可被模型引用的信源中占比显著。
+              <a href="https://www.semrush.com/" target="_blank" rel="noopener noreferrer">Semrush</a>
+            </figcaption>
+          </figure>
+        </section>
+
+        <section class="slide slide-crawl-index" data-title="Zero-click 与 AI Overview">
+          <h2>变化三：zero-click 与 AI Overview</h2>
+          <div class="crawl-split crawl-split--figure-left">
+            <div class="crawl-figure-wrap">
+              <img
+                class="crawl-figure"
+                src="./images/google-ai-overview-lawn-water-california.png"
+                alt="Google 搜索结果示意：查询 best time to water lawn in california，顶部 AI 概览给出直接答案与来源卡"
+                width="1100"
+                height="720"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="crawl-text-stack">
+              <ul>
+                <li>结果页置顶出现 <strong>AI Overview</strong> 的概率增高：总结多页内容，减少用户向下滚动与点击。</li>
+                <li>对 <strong>informational</strong>（信息型）词影响更大——用户已得到答案，未必再点进前十网页。</li>
+                <li class="muted">例：搜「best time to water lawn in california」，置顶即答，削弱下方 blog 点击率。</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-ai-overview-takeaways" data-title="Google AI Overview 的影响">
+          <h2>Google AI Overview 的影响</h2>
+          <div class="takeaways-grid-3-2">
+            <div class="takeaways-row--top3">
+              <div class="stat">
+                <strong>13%</strong>
+                <span>全量 Google 查询中会触发 AI Overview 的比例已达该量级（较 2025 年初显著提升）。</span>
+              </div>
+              <div class="stat">
+                <strong>18%</strong>
+                <span>出现 AI Overview 时，排名第一的自然搜索结果点击率平均下降幅度。</span>
+              </div>
+              <div class="stat">
+                <strong>30–40%</strong>
+                <span>典型信息型主题的站点自然流量受「零点击」摘要侵蚀的降幅区间。</span>
+              </div>
+            </div>
+            <div class="takeaways-row--bot2">
+              <div class="stat">
+                <strong>25.5%</strong>
+                <span>含广告展示的 AI Overview 结果占比（较更早统计明显抬升）。</span>
+              </div>
+              <div class="stat">
+                <strong>+35%</strong>
+                <span>品牌在 AI Overview 中被引用时，所获自然点击的提升幅度示意。</span>
+              </div>
+            </div>
+          </div>
+          <p class="wix-chart-caption">
+            本页数据来源：
+            <a href="https://www.digitalapplied.com/blog/ai-overviews-13-percent-queries-seo-traffic-impact"
+              target="_blank" rel="noopener noreferrer">Digital Applied — AI Overviews: 13 Percent of Queries &amp; SEO Impact</a>
+          </p>
+        </section>
+
+        <section class="slide slide-seo-impact-flowchart" data-title="如何影响传统 SEO">
+          <h2>如何影响传统 SEO？</h2>
+          <div class="seo-flow-canvas">
+            <div class="seo-flow" role="presentation">
+              <div class="seo-flow-inputs">
+                <div class="seo-flow-chip">SERP 多元化</div>
+                <div class="seo-flow-chip">AI-based search</div>
+                <div class="seo-flow-chip">Zero-click 搜索</div>
+              </div>
+              <span class="seo-flow-arrow" aria-hidden="true">→</span>
+              <div class="seo-flow-box">
+                <span class="seo-flow-box-head">共同作用</span>
+                <p class="seo-flow-box-body">SEO 渠道动作性价比下降</p>
+              </div>
+              <span class="seo-flow-arrow" aria-hidden="true">→</span>
+              <div class="seo-flow-box">
+                <span class="seo-flow-box-head">结果</span>
+                <p class="seo-flow-box-body">单靠 SEO 更难单独拉高传统搜索中的品牌曝光</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-title="品牌如何应变">
+          <h2>品牌如何应变？</h2>
+          <div class="grid-2">
+            <div class="card">
+              <h3>品牌在搜索渠道的目标（OLD）</h3>
+              <ul>
+                <li>提高官网blog排名</li>
+                <li>提高官网的品类词排名</li>
+                <li>提高排名页面的点击率</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>品牌在搜索渠道的目标（NEW）</h3>
+              <ul>
+                <li>在行业高相关搜索词的SERP里，努力提高品牌相关内容的占比，最终实现品牌内容在搜索结果的霸屏。(Surround Sound SEO)</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide slide-navimow-network" data-title="Navimow 品牌内容网络">
+          <h2>Navimow 品牌内容网络</h2>
+          <p class="lead">用户搜索：<strong>best robot lawn mower for steep slope</strong></p>
+          <div class="navimow-vs-split" role="presentation">
+            <div class="card">
+              <h3>单一入口</h3>
+              <p>只在首页搜索结果看到一篇 Navimow 官网的 blog。</p>
+            </div>
+            <div class="navimow-vs-divider" aria-hidden="true">vs.</div>
+            <div class="card">
+              <h3>多触点曝光（示意）</h3>
+              <ul>
+                <li>在 <strong>AI Overview</strong> 看到 Navimow X4 作为 <strong>Top 1</strong> 被推荐；</li>
+                <li>自然排名<strong>第 1</strong>：媒体大站文章，把 Navimow X4 作为 <strong>Top Pick</strong> 推荐；</li>
+                <li>自然排名<strong>第 3</strong>：Navimow 官网文章；</li>
+                <li>自然排名<strong>第 5</strong>：多个 Reddit 帖子集合，标题或评论里均提到 Navimow；</li>
+                <li>自然排名<strong>第 7</strong>：多个 YouTube 测评视频，均提到 Navimow X4。</li>
+              </ul>
+            </div>
+          </div>
+          <p class="tagline">同一查询下，品牌在 AI 摘要、权威媒体、官网、UGC 与视频中反复露出——即「可引用的品牌内容网络」的典型形态。</p>
+        </section>
+
+        <!-- SEO_MKT_Workflow.pdf：四阶段全员协作流 -->
+        <section class="slide slide-ranking-title-only" data-title="SEO 协作工作流">
+          <p class="workflow-phase-label">Workflow in Action</p>
+          <h2>SEO 驱动的全域营销增长引擎</h2>
+          <p class="tagline" style="margin-top: 1rem; max-width: 36ch; margin-left: auto; margin-right: auto">
+            四阶段可落地全员协作流</p>
+        </section>
+
+        <section class="slide" data-title="规划期：数据赋能">
+          <p class="workflow-phase-label">阶段 1 / 4</p>
+          <h2>规划期：数据赋能（SEO 前置导航）</h2>
+          <p class="lead">打破「拍脑袋想选题」的传统模式。由 SEO 团队作为「情报雷达」，基于真实搜索意图，提前向 MKT 团队输出详尽的「用户痛点问题清单」与「高潜力流量蓝海主题」。</p>
+          <blockquote class="deck-quote" style="margin-top: 0.75rem">价值点：确保团队产出的每一篇内容、每一个视频、每一篇PR稿，每一个论坛贴子，都是用户正在全网主动寻找的答案。</blockquote>
+        </section>
+
+        <section class="slide slide-seo-mkt-workflow" data-title="执行期：全域霸屏">
+          <p class="workflow-phase-label">阶段 2 / 4</p>
+          <h2>执行期：全域霸屏（一鱼多吃）</h2>
+          <p class="lead">当核心词的 SERP 博客坑位极少、或被权威媒体霸占时，迅速启动「跨团队联合火力」，将一个优质 SEO 主题拆解分发：</p>
+          <div class="workflow-triple">
+            <div class="card">
+              <h3>PR 团队</h3>
+              <p>转化为官方权威公关稿，抢占媒体背书与高权重外链。</p>
+            </div>
+            <div class="card">
+              <h3>社媒团队</h3>
+              <p>浓缩为干货图文/帖子，利用平台分发算法获取病毒式曝光。</p>
+            </div>
+            <div class="card">
+              <h3>红人团队</h3>
+              <p>转化为 YouTube / TikTok 测评脚本，实现视觉化的高转化种草。</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-title="传播期：立体追踪">
+          <p class="workflow-phase-label">阶段 3 / 4</p>
+          <h2>传播期：立体追踪（全盘品效合一）</h2>
+          <p class="lead">跳出单一渠道的考核局限，全员共同审视三大核心指标：</p>
+          <div class="stat-row">
+            <div class="stat">
+              <strong>① Brand Lift</strong>
+              <span>品牌词自然搜索量的飙升情况。</span>
+            </div>
+            <div class="stat">
+              <strong>② AI 可见性</strong>
+              <span>内容在 AI 概览（SGE / ChatGPT 等）中的引用可见度。</span>
+            </div>
+            <div class="stat">
+              <strong>③ 全域增长</strong>
+              <span>跨渠道带来的整体全域流量与转化增长。</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="slide" data-title="复盘期：资产沉淀">
+          <p class="workflow-phase-label">阶段 4 / 4</p>
+          <h2>复盘期：资产沉淀（长期复利）</h2>
+          <p class="lead">不仅关注发布后 48 小时的短期曝光，更要识别并提炼出：哪些内容经受住了时间考验，沉淀为长期被用户搜索、被机器算法信任的「数字资产」，以此反哺下一轮内容规划。</p>
+        </section>
+
+        <section class="slide slide-faq" data-title="FAQ">
+          <h2>常见问题（FAQ）</h2>
+          <div class="faq-stack">
+            <div class="faq-item">
+              <p class="faq-q">AI 时代还需要做传统 SEO 吗？</p>
+              <p class="faq-a">需要。自然搜索仍是重要入口；变化在于不能只押单一页面排名，而要配合 SERP 多元化与 AI 摘要，建设可被引用、可跨渠道复用的内容资产。</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">「品牌内容网络」和单纯加强官网 blog 有什么不同？</p>
+              <p class="faq-a">目标从「推高某几条 URL」转向「在行业高相关词的整页结果里，提高品牌相关内容的占比」——同一主题可拆成 PR、社媒、视频、UGC 等多形态，协同占位。</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">AI Overview / ChatGPT 里出现品牌，要怎么跟踪？</p>
+              <p class="faq-a">除品牌词自然量（Brand lift）外，可抽样监测典型问题下是否被摘录、引用来源是否包含自有与合作媒体；与曝光、全域转化一并复盘，而非只看单渠道点击率。</p>
+            </div>
+            <div class="faq-item">
+              <p class="faq-q">团队资源有限，必须所有渠道都做吗？</p>
+              <p class="faq-a">不必一次性铺开。可按「规划期」清单优先高意图主题，先看 SERP 缺什么形态（视频、权威媒体、UGC），再选 1～2 个渠道联合试水，用传播与复盘数据迭代下一波。</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="ui-bar">
+        <span id="slideLabel">1 / 24 · 封面</span>
+        <span class="hint">聚焦舞台后使用键盘</span>
+        <div class="progress" id="progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const THEME_KEY = "seo-deck-theme";
+      const root = document.documentElement;
+      const saved = localStorage.getItem(THEME_KEY);
+      const valid = new Set(["midnight", "daylight", "editorial", "forest", "neon", "terracotta"]);
+      if (saved && valid.has(saved)) root.dataset.theme = saved;
+
+      const themePicker = document.getElementById("themePicker");
+      function syncThemeButtons() {
+        const t = root.dataset.theme || "midnight";
+        themePicker.querySelectorAll("button[data-theme]").forEach((btn) => {
+          const on = btn.getAttribute("data-theme") === t;
+          btn.classList.toggle("on", on);
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+      }
+      themePicker.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-theme]");
+        if (!btn) return;
+        const id = btn.getAttribute("data-theme");
+        root.dataset.theme = id;
+        localStorage.setItem(THEME_KEY, id);
+        syncThemeButtons();
+      });
+      syncThemeButtons();
+
+      const slides = Array.from(document.querySelectorAll(".slide"));
+      const stage = document.getElementById("stage");
+      const label = document.getElementById("slideLabel");
+      const progress = document.getElementById("progress");
+      let i = 0;
+
+      slides.forEach((_, idx) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("aria-label", "第 " + (idx + 1) + " 张");
+        b.addEventListener("click", () => go(idx));
+        progress.appendChild(b);
+      });
+      const dots = () => progress.querySelectorAll("button");
+
+      function render() {
+        slides.forEach((s, j) => s.classList.toggle("active", j === i));
+        const title = slides[i].dataset.title || "";
+        label.textContent = (i + 1) + " / " + slides.length + (title ? " · " + title : "");
+        dots().forEach((d, j) => d.classList.toggle("on", j === i));
+      }
+
+      function go(n) {
+        i = (n + slides.length) % slides.length;
+        render();
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
+          e.preventDefault();
+          go(i + 1);
+        } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+          e.preventDefault();
+          go(i - 1);
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          go(0);
+        } else if (e.key === "End") {
+          e.preventDefault();
+          go(slides.length - 1);
+        }
+      });
+
+      stage.addEventListener("click", () => stage.focus());
+      render();
+      stage.focus();
+    })();
+  </script>
+</body>
+
+</html>
