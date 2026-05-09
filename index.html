@@ -1324,6 +1324,83 @@
       line-height: 1.55;
       margin: 0;
     }
+
+    /* 目录页：七大板块卡片栅格 */
+    .slide.slide-toc {
+      justify-content: flex-start;
+    }
+
+    .slide.slide-toc h2 {
+      text-align: center;
+      width: 100%;
+      align-self: stretch;
+      margin-bottom: clamp(0.65rem, 1.4vw, 1rem);
+    }
+
+    .slide.slide-toc .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: clamp(10px, 1.4vw, 16px);
+      width: 100%;
+      max-width: min(56rem, 100%);
+      margin: 0 auto;
+      flex: 1;
+      min-height: 0;
+      align-content: start;
+    }
+
+    @media (max-width: 900px) {
+      .slide.slide-toc .toc-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-aspect-ratio: 4/3) {
+      .slide.slide-toc .toc-grid {
+        grid-template-columns: 1fr;
+        max-width: min(28rem, 100%);
+      }
+    }
+
+    .slide.slide-toc .toc-card {
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(10px, 1.2vw, 14px);
+      min-width: 0;
+      margin: 0;
+      padding: clamp(12px, 1.5vw, 16px) clamp(14px, 1.6vw, 18px);
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      border-left: 4px solid var(--accent);
+      box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+    }
+
+    html[data-theme="midnight"] .slide.slide-toc .toc-card,
+    html[data-theme="forest"] .slide.slide-toc .toc-card,
+    html[data-theme="neon"] .slide.slide-toc .toc-card,
+    html[data-theme="terracotta"] .slide.slide-toc .toc-card {
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    .slide.slide-toc .toc-num {
+      flex-shrink: 0;
+      min-width: 1.75em;
+      font-family: var(--font-stat);
+      font-weight: 700;
+      font-size: clamp(0.95rem, 1.25vw, 1.1rem);
+      line-height: 1.3;
+      color: var(--accent);
+      text-align: center;
+    }
+
+    .slide.slide-toc .toc-title {
+      margin: 0;
+      font-size: clamp(0.82rem, 1.05vw, 0.98rem);
+      font-weight: 600;
+      line-height: 1.45;
+      color: var(--text);
+    }
   </style>
 </head>
 
@@ -1373,6 +1450,40 @@
             </div>
           </div>
           <p class="tagline">这些需求和问题，其实比较生动地展现了 SEO 作为一个流量渠道的特殊：信息 gap 深、反馈周期长、可把控性低。</p>
+        </section>
+
+        <section class="slide slide-toc" data-title="目录">
+          <h2>本场分享 · 七大板块</h2>
+          <div class="toc-grid" role="list">
+            <article class="toc-card" role="listitem">
+              <span class="toc-num" aria-hidden="true">1</span>
+              <p class="toc-title">什么是 SEO？</p>
+            </article>
+            <article class="toc-card" role="listitem">
+              <span class="toc-num" aria-hidden="true">2</span>
+              <p class="toc-title">我们怎么做 SEO？</p>
+            </article>
+            <article class="toc-card" role="listitem">
+              <span class="toc-num" aria-hidden="true">3</span>
+              <p class="toc-title">SEO 之于品牌独立站的价值？</p>
+            </article>
+            <article class="toc-card" role="listitem">
+              <span class="toc-num" aria-hidden="true">4</span>
+              <p class="toc-title">自然搜索在 AI 时代发生了哪些变化？</p>
+            </article>
+            <article class="toc-card" role="listitem">
+              <span class="toc-num" aria-hidden="true">5</span>
+              <p class="toc-title">这些变化如何影响传统 SEO？</p>
+            </article>
+            <article class="toc-card" role="listitem">
+              <span class="toc-num" aria-hidden="true">6</span>
+              <p class="toc-title">品牌如何应变？</p>
+            </article>
+            <article class="toc-card" role="listitem">
+              <span class="toc-num" aria-hidden="true">7</span>
+              <p class="toc-title">SEO x MKT：AI 时代下的协作机制</p>
+            </article>
+          </div>
         </section>
 
         <section class="slide slide-ranking-title-only" data-title="什么是 SEO？">
@@ -1806,7 +1917,7 @@
       </div>
 
       <div class="ui-bar">
-        <span id="slideLabel">1 / 28 · 封面</span>
+        <span id="slideLabel">1 / 29 · 封面</span>
         <span class="hint">聚焦舞台后使用键盘</span>
         <div class="progress" id="progress"></div>
       </div>
