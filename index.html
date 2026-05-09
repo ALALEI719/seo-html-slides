@@ -859,8 +859,20 @@
     }
 
     /* Key Takeaways：与「变化二」同源 .stat 字阶；上三下二大卡片排版 */
+    /* 垂直居中整块内容，避免贴顶留白过多 */
     .slide.slide-ai-overview-takeaways {
-      justify-content: flex-start;
+      justify-content: center;
+      gap: clamp(14px, 2.2vw, 26px);
+    }
+
+    .slide.slide-ai-overview-takeaways h2 {
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
+
+    .slide.slide-ai-overview-takeaways > .wix-chart-caption {
+      margin-top: 0;
+      flex-shrink: 0;
     }
 
     .slide.slide-ai-overview-takeaways .takeaways-grid-3-2 {
@@ -868,8 +880,8 @@
       flex-direction: column;
       gap: clamp(18px, 2.8vw, 28px);
       width: 100%;
-      margin-top: 0.5rem;
-      flex: 1;
+      margin-top: 0;
+      flex: 0 1 auto;
       min-height: 0;
     }
 
