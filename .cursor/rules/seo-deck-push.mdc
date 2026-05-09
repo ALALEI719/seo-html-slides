@@ -1,0 +1,12 @@
+---
+description: 演示稿 index.html 改动后自动提交并推送到 GitHub
+globs: index.html
+alwaysApply: false
+---
+
+# SEO HTML 演示稿发布约定
+
+在本仓库中修改 `index.html`（幻灯片内容与样式）后：
+
+1. 除非用户明确说「不要推送」「仅本地」，否则在回答结束前应 **`git commit`（信息写清改了什么）并 `git push origin main`**，以便 GitHub Pages 尽快更新。
+2. 不要将 `.DS_Store`、个人备份或未跟踪的草稿目录一并提交，除非用户要求。
