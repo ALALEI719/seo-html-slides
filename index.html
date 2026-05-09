@@ -934,18 +934,18 @@
       text-align: center;
       width: 100%;
       align-self: stretch;
-      margin-bottom: clamp(1rem, 2vw, 1.75rem);
+      margin-bottom: clamp(0.35rem, 1vw, 0.7rem);
       /* font 继承 .slide h2 — var(--font-h)、weight、accent、clamp 字级 */
     }
 
     .slide.slide-seo-impact-flowchart .seo-flow-canvas {
       width: 100%;
-      flex: 1;
+      flex: 0 1 auto;
       min-height: 0;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
-      padding: clamp(10px, 2vw, 20px);
+      padding: clamp(6px, 1.2vw, 14px) clamp(10px, 2vw, 20px) 0;
     }
 
     .seo-flow {
@@ -1151,54 +1151,6 @@
       margin: 0 2px;
     }
 
-    .theme-picker {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      z-index: 3;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 6px;
-      max-width: min(92%, 520px);
-      pointer-events: auto;
-    }
-
-    .theme-picker span.label {
-      width: 100%;
-      text-align: right;
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      opacity: 0.85;
-    }
-
-    .theme-picker button {
-      font-family: var(--font-body);
-      font-size: 0.68rem;
-      font-weight: 500;
-      padding: 5px 9px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: var(--bg-card);
-      color: var(--muted);
-      cursor: pointer;
-      transition: color 0.2s, border-color 0.2s, background 0.2s;
-    }
-
-    .theme-picker button:hover {
-      color: var(--text);
-      border-color: var(--accent);
-    }
-
-    .theme-picker button.on {
-      color: #fff;
-      background: var(--accent);
-      border-color: var(--accent);
-    }
-
     /* 全稿共用：右下角品牌标识；不裁切内容，完整显示整图（纵横比由 PNG 决定） */
     .deck-brand-logo {
       position: absolute;
@@ -1250,11 +1202,6 @@
     .progress button.on {
       background: var(--accent);
       transform: scale(1.15);
-    }
-
-    .hint {
-      font-size: 0.75rem;
-      opacity: 0.75;
     }
 
     /* A(03-11) 迁移页：流量示例缩略图与定义页 */
@@ -1520,15 +1467,6 @@
 <body>
   <div class="deck">
     <div class="stage" id="stage" tabindex="0" role="application" aria-label="幻灯片演示">
-      <div class="theme-picker" id="themePicker" role="toolbar" aria-label="视觉风格">
-        <span class="label">风格</span>
-        <button type="button" data-theme="midnight" title="深蓝暗色 + 亮蓝强调">午夜科技</button>
-        <button type="button" data-theme="daylight" title="浅色背景 + 商务蓝">浅灰商务</button>
-        <button type="button" data-theme="editorial" title="纸色底 + 衬线标题">纸刊编辑</button>
-        <button type="button" data-theme="forest" title="墨绿底 + 薄荷绿强调">森意墨绿</button>
-        <button type="button" data-theme="neon" title="紫粉 + 青色点缀">霓虹夜景</button>
-        <button type="button" data-theme="terracotta" title="暖棕 + 陶土橙">暖沙陶土</button>
-      </div>
       <div class="deck-brand-logo">
         <img src="./images/deck-logo.png" alt="NAVIMOW" width="320" height="80" decoding="async" />
       </div>
@@ -2046,7 +1984,6 @@
 
       <div class="ui-bar">
         <span id="slideLabel">1 / 29 · 封面</span>
-        <span class="hint">聚焦舞台后使用键盘</span>
         <div class="progress" id="progress"></div>
       </div>
     </div>
@@ -2059,30 +1996,7 @@
 
   <script>
     (function () {
-      const THEME_KEY = "seo-deck-theme";
-      const root = document.documentElement;
-      const saved = localStorage.getItem(THEME_KEY);
-      const valid = new Set(["midnight", "daylight", "editorial", "forest", "neon", "terracotta"]);
-      if (saved && valid.has(saved)) root.dataset.theme = saved;
-
-      const themePicker = document.getElementById("themePicker");
-      function syncThemeButtons() {
-        const t = root.dataset.theme || "midnight";
-        themePicker.querySelectorAll("button[data-theme]").forEach((btn) => {
-          const on = btn.getAttribute("data-theme") === t;
-          btn.classList.toggle("on", on);
-          btn.setAttribute("aria-pressed", on ? "true" : "false");
-        });
-      }
-      themePicker.addEventListener("click", (e) => {
-        const btn = e.target.closest("button[data-theme]");
-        if (!btn) return;
-        const id = btn.getAttribute("data-theme");
-        root.dataset.theme = id;
-        localStorage.setItem(THEME_KEY, id);
-        syncThemeButtons();
-      });
-      syncThemeButtons();
+      document.documentElement.dataset.theme = "editorial";
 
       const slides = Array.from(document.querySelectorAll(".slide"));
       const stage = document.getElementById("stage");
