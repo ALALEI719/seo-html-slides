@@ -722,6 +722,75 @@
       line-height: 1.6;
     }
 
+    /* 封面：左标题右插画，整块在舞台内近似垂直居中 */
+    .slide.cover {
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cover-split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: clamp(28px, 4.2vw, 64px);
+      width: 100%;
+      max-width: min(70rem, 100%);
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .cover-copy {
+      text-align: left;
+      min-width: 0;
+    }
+
+    .cover-figure-wrap {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 0;
+    }
+
+    .cover-hero-img {
+      width: 100%;
+      max-width: min(440px, 38vw);
+      max-height: min(72vh, 640px);
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    @media (max-aspect-ratio: 4/3) {
+      .cover-split {
+        grid-template-columns: 1fr;
+        gap: clamp(22px, 4vw, 36px);
+        max-width: min(36rem, 100%);
+      }
+
+      .cover-copy {
+        text-align: center;
+      }
+
+      .cover h1 {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cover .subtitle {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cover-figure-wrap {
+        order: -1;
+      }
+
+      .cover-hero-img {
+        max-width: min(280px, 72vw);
+        max-height: min(42vh, 340px);
+      }
+    }
+
     .numbered ol {
       list-style: none;
       counter-reset: item;
@@ -1454,8 +1523,21 @@
       <div class="slides" id="slides">
 
         <section class="slide cover active" data-title="封面">
-          <h1>AI 时代，品牌如何在 Google 和 AI 搜索中被看见</h1>
-          <p class="subtitle">从单一的 SEO 排名，到霸屏 AI 时代的可引用品牌内容网络。</p>
+          <div class="cover-split">
+            <div class="cover-copy">
+              <h1>AI 时代，品牌如何在 Google 和 AI 搜索中被看见</h1>
+              <p class="subtitle">从单一的 SEO 排名，到霸屏 AI 时代的可引用品牌内容网络。</p>
+            </div>
+            <figure class="cover-figure-wrap">
+              <img
+                class="cover-hero-img"
+                src="./images/cover-ai-content-network.jpg"
+                alt="概念插画：人工智能与博客、视频、问答、社交网络等内容形态组成的品牌内容网络。"
+                width="927"
+                height="1024"
+                decoding="async" />
+            </figure>
+          </div>
         </section>
 
         <section class="slide" data-title="SEO 人的日常">
