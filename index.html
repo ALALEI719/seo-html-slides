@@ -925,16 +925,18 @@
       }
     }
 
-    /* 三项变化 → SEO：字阶对齐全稿 .slide h2 / .card h3 / ul li */
+    /* 三项变化 → SEO：标题 + 流程图作为一整块垂直居中 */
     .slide.slide-seo-impact-flowchart {
-      justify-content: flex-start;
+      justify-content: center;
+      align-items: stretch;
+      gap: clamp(0.5rem, 1.2vw, 1rem);
     }
 
     .slide.slide-seo-impact-flowchart h2 {
       text-align: center;
       width: 100%;
       align-self: stretch;
-      margin-bottom: clamp(0.35rem, 1vw, 0.7rem);
+      margin-bottom: 0;
       /* font 继承 .slide h2 — var(--font-h)、weight、accent、clamp 字级 */
     }
 
@@ -943,9 +945,9 @@
       flex: 0 1 auto;
       min-height: 0;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: center;
-      padding: clamp(6px, 1.2vw, 14px) clamp(10px, 2vw, 20px) 0;
+      padding: 0 clamp(10px, 2vw, 20px);
     }
 
     .seo-flow {
