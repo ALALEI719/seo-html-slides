@@ -276,6 +276,31 @@
       text-align: center;
     }
 
+    /* 结论高亮页：单句金句提炼 */
+    .slide.slide-key-conclusion {
+      gap: clamp(12px, 2vw, 20px);
+    }
+
+    .slide.slide-key-conclusion h2 {
+      margin-bottom: 0;
+    }
+
+    .slide.slide-key-conclusion .lead {
+      margin: 0;
+      max-width: min(52ch, 92%);
+      font-size: clamp(1.06rem, 1.6vw, 1.38rem);
+      line-height: 1.68;
+      font-weight: 500;
+      color: var(--text);
+      padding: clamp(18px, 2.6vw, 30px) clamp(20px, 3.2vw, 40px);
+      background: var(--accent-soft);
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--accent);
+      border-radius: var(--deck-card-radius, 12px);
+      box-shadow: var(--deck-card-shadow);
+      text-align: center;
+    }
+
     .slide.slide-closing-thanks .tagline {
       margin-top: clamp(0.75rem, 2vw, 1.25rem);
       margin-bottom: 0;
@@ -2201,7 +2226,7 @@
           <p class="lead">不仅关注发布后 48 小时的短期曝光，更要识别不同形态的爆款内容，沉淀下来，作为长期资产，以此反哺下一轮内容规划。</p>
         </section>
 
-        <section class="slide" data-title="Just a Thought：协作怎么更省力">
+        <section class="slide" data-title="Just a Thought">
           <h2>不是强行塞任务，Just a Thought：SEO × MKT 协作怎么更省力</h2>
           <div class="grid-2">
             <div class="card">
@@ -2219,11 +2244,15 @@
                 <li>先对齐共同目标：品牌可见性和业务增量，不只看单渠道 KPI。</li>
                 <li>用一个小闭环起步：先跑通 1 个主题，再复制到更多主题。</li>
                 <li>一份母内容，多端改编：文章、社媒、PR、视频脚本共用素材包。</li>
-                <li>围绕各自内部核心 OKR，确定内容主取舍标准。</li>
+                <li>各自围绕各自内部核心 OKR，确定内容主题取舍标准。</li>
               </ul>
             </div>
           </div>
-          <p class="tagline">把同样的投入，在品牌维度做出更大的效果。</p>
+        </section>
+
+        <section class="slide slide-ranking-title-only slide-key-conclusion" data-title="结论">
+          <h2>核心结论</h2>
+          <p class="lead">拉平信息差，让 MKT 多一份用户需求视角、多一份流量曝光增量的可能性，用同样的投入，在品牌维度做出更大的效果。</p>
         </section>
 
         <section class="slide slide-ranking-title-only slide-closing-thanks" data-title="致谢">
