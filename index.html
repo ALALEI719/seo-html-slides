@@ -35,6 +35,10 @@
       --deck-card-radius: 12px;
       --deck-card-shadow: 0 2px 10px rgba(0, 0, 0, 0.18), 0 14px 44px rgba(0, 0, 0, 0.32);
       --deck-card-shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.25), 0 20px 52px rgba(0, 0, 0, 0.36);
+      /* 与 slide 20 .stat span 对齐的正文标尺（后半段流程后统一） */
+      --deck-body-size: clamp(0.85rem, 1.1vw, 1rem);
+      --deck-body-lh: 1.45;
+      --deck-body-color: var(--muted);
     }
 
     html[data-theme="daylight"] {
@@ -853,9 +857,9 @@
     }
 
     .stat span {
-      font-size: clamp(0.85rem, 1.1vw, 1rem);
-      color: var(--muted);
-      line-height: 1.45;
+      font-size: var(--deck-body-size);
+      line-height: var(--deck-body-lh);
+      color: var(--deck-body-color);
     }
 
     /* Key Takeaways：与「变化二」同源 .stat 字阶；上三下二大卡片排版 */
@@ -982,11 +986,11 @@
     .seo-flow-chip {
       font-family: var(--font-body);
       padding: clamp(16px, 2vw, 26px);
-      font-size: clamp(0.95rem, 1.35vw, 1.2rem);
+      font-size: var(--deck-body-size);
       font-weight: 400;
       text-align: center;
-      color: var(--text);
-      line-height: 1.55;
+      color: var(--deck-body-color);
+      line-height: var(--deck-body-lh);
       min-width: clamp(108px, 18vw, 200px);
       max-width: min(240px, 100%);
     }
@@ -1017,9 +1021,9 @@
 
     .seo-flow-box-head {
       font-family: var(--font-body);
-      font-size: clamp(0.95rem, 1.25vw, 1.15rem);
+      font-size: var(--deck-body-size);
       font-weight: 600;
-      line-height: 1.35;
+      line-height: var(--deck-body-lh);
       margin: 0;
       color: var(--warn);
       text-align: center;
@@ -1028,11 +1032,11 @@
     .seo-flow-box-body {
       margin: 0;
       font-family: var(--font-body);
-      font-size: clamp(0.95rem, 1.35vw, 1.2rem);
+      font-size: var(--deck-body-size);
       font-weight: 400;
-      line-height: 1.55;
+      line-height: var(--deck-body-lh);
       text-align: center;
-      color: var(--text);
+      color: var(--deck-body-color);
     }
 
     @media (max-width: 720px) {
@@ -1063,6 +1067,41 @@
         max-width: min(100%, 420px);
         width: 100%;
       }
+    }
+
+    /* 从第 21 页起：段落、列表与引用等正文与 slide 20 .stat span 标尺一致 */
+    #slides > .slide:nth-child(n + 21) .lead {
+      font-size: var(--deck-body-size);
+      line-height: var(--deck-body-lh);
+    }
+
+    #slides > .slide:nth-child(n + 21) .tagline {
+      font-size: var(--deck-body-size);
+      line-height: var(--deck-body-lh);
+    }
+
+    #slides > .slide:nth-child(n + 21) .card p {
+      font-size: var(--deck-body-size);
+      line-height: var(--deck-body-lh);
+      color: var(--deck-body-color);
+    }
+
+    #slides > .slide:nth-child(n + 21) .card li {
+      font-size: var(--deck-body-size);
+      line-height: var(--deck-body-lh);
+      color: var(--deck-body-color);
+    }
+
+    #slides > .slide:nth-child(n + 21) blockquote.deck-quote {
+      font-size: var(--deck-body-size);
+      line-height: var(--deck-body-lh);
+      color: var(--deck-body-color);
+    }
+
+    #slides > .slide:nth-child(n + 21) .faq-q,
+    #slides > .slide:nth-child(n + 21) .faq-a {
+      font-size: var(--deck-body-size);
+      line-height: var(--deck-body-lh);
     }
 
     /* 「变化二」后独立一页：全球搜索流量占比示意图（Wix Studio） */
