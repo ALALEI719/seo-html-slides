@@ -1104,6 +1104,22 @@
       color: var(--deck-body-color);
     }
 
+    /* 第 12、15、19 页：正文与 slide 20 .stat span 标尺一致 */
+    #slides > .slide:nth-child(12) .tagline,
+    #slides > .slide:nth-child(15) .lead {
+      font-size: var(--deck-body-size);
+      line-height: var(--deck-body-lh);
+      color: var(--deck-body-color);
+    }
+
+    #slides > .slide:nth-child(12) .card li,
+    #slides > .slide:nth-child(15) li,
+    #slides > .slide:nth-child(19) li {
+      font-size: var(--deck-body-size);
+      line-height: var(--deck-body-lh);
+      color: var(--deck-body-color);
+    }
+
     /* 从第 21 页起：段落、列表与引用等正文与 slide 20 .stat span 标尺一致 */
     #slides > .slide:nth-child(n + 21) .lead {
       font-size: var(--deck-body-size);
