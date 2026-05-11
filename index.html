@@ -1069,6 +1069,32 @@
       }
     }
 
+    /* 第 2、6、11 页：正文与 slide 20 .stat span 标尺一致 */
+    #slides > .slide:nth-child(2) .lead,
+    #slides > .slide:nth-child(2) .tagline {
+      font-size: var(--deck-body-size);
+      line-height: var(--deck-body-lh);
+      color: var(--deck-body-color);
+    }
+
+    #slides > .slide:nth-child(2) .card li {
+      font-size: var(--deck-body-size);
+      line-height: var(--deck-body-lh);
+      color: var(--deck-body-color);
+    }
+
+    #slides > .slide.slide-seo-def-quote:nth-child(6) blockquote.deck-quote {
+      font-size: var(--deck-body-size);
+      line-height: var(--deck-body-lh);
+      color: var(--deck-body-color);
+    }
+
+    #slides > .slide.slide-ranked-factors:nth-child(11) .card li {
+      font-size: var(--deck-body-size);
+      line-height: var(--deck-body-lh);
+      color: var(--deck-body-color);
+    }
+
     /* 从第 21 页起：段落、列表与引用等正文与 slide 20 .stat span 标尺一致 */
     #slides > .slide:nth-child(n + 21) .lead {
       font-size: var(--deck-body-size);
