@@ -1206,6 +1206,32 @@
       transform: scale(1.15);
     }
 
+    /* 底部栏：全屏按钮（进入 / 退出浏览器演示全屏） */
+    .ui-fs-btn {
+      pointer-events: auto;
+      flex-shrink: 0;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--bg-card);
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .ui-fs-btn:hover {
+      color: var(--text);
+      border-color: var(--accent);
+    }
+
+    .ui-fs-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+
     /* A(03-11) 迁移页：流量示例缩略图与定义页 */
     .slide.slide-seo-def-quote {
       align-items: center;
@@ -1986,6 +2012,9 @@
 
       <div class="ui-bar">
         <span id="slideLabel">1 / 29 · 封面</span>
+        <button type="button" class="ui-fs-btn" id="btnFullscreen" title="隐藏浏览器标签栏与地址栏，用于投屏演示。按 Esc 或再点此按钮退出。" aria-pressed="false">
+          全屏演示
+        </button>
         <div class="progress" id="progress"></div>
       </div>
     </div>
@@ -2004,7 +2033,72 @@
       const stage = document.getElementById("stage");
       const label = document.getElementById("slideLabel");
       const progress = document.getElementById("progress");
+      const btnFullscreen = document.getElementById("btnFullscreen");
       let i = 0;
+
+      function getFullscreenElement() {
+        return (
+          document.fullscreenElement ||
+          document.webkitFullscreenElement ||
+          document.mozFullScreenElement ||
+          document.msFullscreenElement ||
+          null
+        );
+      }
+
+      function requestFullscreenRoot() {
+        const el = document.documentElement;
+        const req =
+          el.requestFullscreen ||
+          el.webkitRequestFullscreen ||
+          el.mozRequestFullScreen ||
+          el.msRequestFullscreen;
+        if (req) return req.call(el);
+        return Promise.reject(new Error("fullscreen not supported"));
+      }
+
+      function exitFullscreenDoc() {
+        const exit =
+          document.exitFullscreen ||
+          document.webkitExitFullscreen ||
+          document.mozCancelFullScreen ||
+          document.msExitFullscreen;
+        if (exit) return exit.call(document);
+        return Promise.reject(new Error("exit fullscreen not supported"));
+      }
+
+      function syncFullscreenButton() {
+        if (!btnFullscreen) return;
+        const fs = !!getFullscreenElement();
+        btnFullscreen.textContent = fs ? "退出全屏" : "全屏演示";
+        btnFullscreen.setAttribute("aria-pressed", fs ? "true" : "false");
+      }
+
+      async function toggleFullscreen() {
+        try {
+          if (getFullscreenElement()) {
+            await exitFullscreenDoc();
+          } else {
+            await requestFullscreenRoot();
+          }
+        } catch (_) {
+          /* 部分环境需用户手势或策略限制，静默失败即可 */
+        }
+        syncFullscreenButton();
+      }
+
+      ["fullscreenchange", "webkitfullscreenchange", "mozfullscreenchange", "MSFullscreenChange"].forEach((ev) => {
+        document.addEventListener(ev, syncFullscreenButton);
+      });
+
+      if (btnFullscreen) {
+        btnFullscreen.addEventListener("click", (e) => {
+          e.stopPropagation();
+          toggleFullscreen();
+        });
+      }
+
+      syncFullscreenButton();
 
       slides.forEach((_, idx) => {
         const b = document.createElement("button");
@@ -2070,6 +2164,16 @@
           e.preventDefault();
           closeImageModal();
           return;
+        }
+
+        /* F：切换浏览器全屏（需非组合键；与翻页快捷键不冲突） */
+        if ((e.key === "f" || e.key === "F") && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          const tag = e.target && e.target.tagName;
+          if (tag !== "INPUT" && tag !== "TEXTAREA") {
+            e.preventDefault();
+            toggleFullscreen();
+            return;
+          }
         }
 
         if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
