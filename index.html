@@ -1078,6 +1078,99 @@
       }
     }
 
+    /* GEO 逻辑页：四段因果流程图（箭头串联） */
+    .slide.slide-geo-flow {
+      justify-content: center;
+      align-items: stretch;
+      gap: clamp(0.6rem, 1.3vw, 1.1rem);
+    }
+
+    .slide.slide-geo-flow h2 {
+      text-align: center;
+      margin-bottom: 0;
+    }
+
+    .slide.slide-geo-flow .lead {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: clamp(0.2rem, 0.8vw, 0.6rem);
+    }
+
+    .slide.slide-geo-flow .geo-flow-canvas {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 clamp(8px, 1.8vw, 18px);
+    }
+
+    .slide.slide-geo-flow .geo-flow {
+      width: 100%;
+      max-width: min(1180px, 100%);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+      align-items: stretch;
+      gap: clamp(6px, 1vw, 12px);
+    }
+
+    .slide.slide-geo-flow .geo-node {
+      background: var(--bg-card);
+      border: none;
+      border-left: var(--deck-card-accent-w, 7px) solid var(--accent);
+      border-radius: var(--deck-card-radius, 12px);
+      box-shadow: var(--deck-card-shadow);
+      padding: clamp(12px, 1.6vw, 18px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(6px, 0.9vw, 10px);
+      min-height: clamp(150px, 22vh, 210px);
+    }
+
+    .slide.slide-geo-flow .geo-node-step {
+      font-family: var(--font-stat);
+      font-size: clamp(0.8rem, 1vw, 0.92rem);
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .slide.slide-geo-flow .geo-node-title {
+      margin: 0;
+      font-size: clamp(0.95rem, 1.25vw, 1.12rem);
+      line-height: 1.35;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .slide.slide-geo-flow .geo-node-desc {
+      margin: 0;
+      font-size: var(--deck-body-size);
+      line-height: var(--deck-body-lh);
+      color: var(--deck-body-color);
+    }
+
+    .slide.slide-geo-flow .geo-arrow {
+      align-self: center;
+      justify-self: center;
+      font-family: var(--font-h);
+      font-size: clamp(1.25rem, 2.1vw, 1.8rem);
+      color: var(--accent);
+      line-height: 1;
+      user-select: none;
+    }
+
+    @media (max-width: 900px) {
+      .slide.slide-geo-flow .geo-flow {
+        grid-template-columns: 1fr;
+        gap: clamp(8px, 1.2vw, 14px);
+      }
+
+      .slide.slide-geo-flow .geo-arrow {
+        transform: rotate(90deg);
+      }
+    }
+
     /* 第 2、6、11 页：正文与 slide 20 .stat span 标尺一致 */
     #slides > .slide:nth-child(2) .lead,
     #slides > .slide:nth-child(2) .tagline {
@@ -2015,28 +2108,36 @@
           <p class="tagline">同一查询下，品牌在 AI 摘要、权威媒体、官网、UGC 与视频中反复露出——即「可引用的品牌内容网络」的典型形态。</p>
         </section>
 
-        <section class="slide" data-title="What real GEO is all about">
-          <h2>这就是 real GEO 的核心逻辑</h2>
-          <p class="lead">不是只做单条内容，而是通过内容网络提高品牌在搜索与 AI 场景中的持续可见性。</p>
-          <div class="stat-row">
-            <div class="stat">
-              <strong>01</strong>
-              <span><strong>Navimow 内容网络霸屏</strong><br />官网、媒体、UGC、视频在同一主题下形成多触点曝光。</span>
-            </div>
-            <div class="stat">
-              <strong>02</strong>
-              <span><strong>Brand Presence 更高</strong><br />用户与平台反复看到品牌，主题相关度与存在感持续累积。</span>
-            </div>
-            <div class="stat">
-              <strong>03</strong>
-              <span><strong>更有概率被 AI 爬虫抓取</strong><br />更多高相关页面和提及信号，被发现、抓取、理解的机会更高。</span>
-            </div>
-            <div class="stat">
-              <strong>04</strong>
-              <span><strong>更有概率被 AI 回答引用</strong><br />当模型生成答案时，更容易把 Navimow 纳入候选与引用来源。</span>
+        <section class="slide slide-geo-flow" data-title="What real GEO is all about">
+          <h2>That's What real "GEO" is all About!</h2>
+          <p class="lead">从内容网络到 AI 引用，是一条可被设计和放大的因果链路。</p>
+          <div class="geo-flow-canvas">
+            <div class="geo-flow" role="presentation">
+              <article class="geo-node">
+                <p class="geo-node-step">STEP 01</p>
+                <h3 class="geo-node-title">Navimow 内容网络霸屏</h3>
+                <p class="geo-node-desc">官网、媒体、UGC、视频在同一主题下形成多触点曝光。</p>
+              </article>
+              <span class="geo-arrow" aria-hidden="true">→</span>
+              <article class="geo-node">
+                <p class="geo-node-step">STEP 02</p>
+                <h3 class="geo-node-title">Brand Presence 更高</h3>
+                <p class="geo-node-desc">用户与平台反复看到品牌，主题相关度与存在感持续累积。</p>
+              </article>
+              <span class="geo-arrow" aria-hidden="true">→</span>
+              <article class="geo-node">
+                <p class="geo-node-step">STEP 03</p>
+                <h3 class="geo-node-title">更有概率被 AI 爬虫抓取</h3>
+                <p class="geo-node-desc">更多高相关页面和提及信号，被发现、抓取、理解的机会更高。</p>
+              </article>
+              <span class="geo-arrow" aria-hidden="true">→</span>
+              <article class="geo-node">
+                <p class="geo-node-step">STEP 04</p>
+                <h3 class="geo-node-title">更有概率被 AI 回答引用</h3>
+                <p class="geo-node-desc">模型生成答案时，更容易把 Navimow 纳入候选与引用来源。</p>
+              </article>
             </div>
           </div>
-          <p class="tagline">That's What real "GEO" is all About!</p>
         </section>
 
         <!-- SEO_MKT_Workflow.pdf：四阶段全员协作流 -->
